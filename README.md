@@ -22,5 +22,34 @@ It's useful to know that lambda functions can help with writing a simple code fo
 
 You may find this link useful: ["How to Use Python Lambda Functions"](https://realpython.com/python-lambda/)
 
+### Data structures from collections, heapq, networkx and beyond
+Python has 4 built-in data structures: lists, tuples, sets and dictionaries. They are all iterables (objects that can be iterated over with the help of a for loop). Another important iterable is an object called strings, they are not considered as data structures but rather a data type (an immutable sequence of characters). Sometimes strings along with float, integer and boolean variables are called primitive data structures.
+
+These four data structures are so important and widely used that they are built in the language itself and optimised. They come with their own methods. Still you may need more advanced data structures (to store and organise your data) - some of them can be imported from existing libraries, others are user-defined. The choice of data structure depends on the requirements of your problem: which operations needs to be the most efficient - searching? sorting? insertion/ deletion? Understanding the strengths and weaknesses of the data structure you use is crucial.
+
+Queues: first-infirst-out (FIFO) data structures useful in modelling waiting lines (=queues) and breadth-first search.
+
+Stacks: last-in-first-out (LIFO) data structures useful for recursive algorithms and undo operations - visualise LIFO as a stack of plates.
+
+Graphs: collections of nodes (vertices) and edges (links) that represent some kind of relationship between the objects represented by nodes. Graphs can represent chemical structures, social networks, help find the shortest path in route planning, etc. Graphs are very well studied in the graph theory and computer science. Even if you can't have an exact solution, quite often you can have an approximate algorithm which produces a reasonably good result (the travelling salesperson problem, TSP, is NP-hard but you have some algorithms which normally give you a route that is slightly worse than the optimal route). Graphs can be directed or undirected.
+
+Trees: hierarchical data structures with parent-child relationships, often used for efficient searching and sorting. In graph theory a tree is an undirected graph in which any two nodes are connected by exactly one edge. In computer science a tree is also a graph which has a root (a node without any parent), nodes (with a parent and children) and leaves (nodes without children). It looks like a rooted up tree. Binary trees are extremely often used.
+
+There is a number of list-like data structure: arrays, numpy arrays, linked lists, circular linked lists, namedtuple to name a few.
+
+There are various dictionary-like structures: hash tables (in fact, a dictionary in Python is a kind of hash table under the hood), OrderedDict, etc
+
+Some other data structures: heaps, priority queues, tries (= prefix trees), various probabilistic data structure (Bloom filters, Bayesian networks, Markov random fields) which I am not going to discuss here as they are quite advanced.
+
+All examples of realisation of data structures using libraries/ modules are presented in data_str.py.
+
+If I couldn't find a suitable library to create a data structure discussed above, they are delayed until the next section about Python classes.
+
+In data_str.py I use deque objects to implement both stacks and queues with most important methods for them: push and pop new elements, view the element to be popped next without removing it (peek), print out the stack/ queue, find out its length.
+
+By the way, another useful object in the library collections is Counter. It is not a data structure, of course , but I included an example of how to use Counter anyway.
+
+In Python dictionaries are unordered collections of key-value pairs. You may need a dictionary-like structure which remembers the order in which its elements are added: OrderedDict, a dictionary subclass from the collections. It maintains the order of insertion, unlike regular dictionaries which may reorder the elements for efficiency.
+
 
 
