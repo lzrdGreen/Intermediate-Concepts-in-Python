@@ -1,4 +1,7 @@
 from collections import deque, Counter, OrderedDict
+import heapq
+import networkx as nx
+import matplotlib.pyplot as plt
 
 # Deques (double-ended queues) are optimized for fast appends and pops from both ends.
 # They can be used to efficiently implement stacks, queues, etc
@@ -108,3 +111,178 @@ print(my_ordered_dict) # Output: OrderedDict([('a', 1), ('b', 2), ('x', 25), ('c
 
 
 
+# Let's draw a very simple graph, a triangle with nodes 1,2,and 3
+# Create an empty graph
+G1 = nx.Graph()
+
+# Add nodes
+G1.add_node(1)
+G1.add_nodes_from([2, 3])
+
+# Add edges
+G1.add_edge(1, 2)
+G1.add_edges_from([(1, 3), (2, 3)])
+
+# Visualize the graph
+nx.draw(G1, with_labels=True, node_color='lightblue', font_weight='bold')
+plt.show()
+
+
+# Now let's create a weighted graph and find the shortest path in it:
+# Create a weighted graph
+G2 = nx.Graph()
+G2.add_edge('A', 'B', weight=4)
+G2.add_edge('A', 'C', weight=2)
+G2.add_edge('B', 'C', weight=5)
+G2.add_edge('B', 'D', weight=10)
+G2.add_edge('C', 'D', weight=3)
+G2.add_edge('D', 'E', weight=7)
+
+# Draw the graph
+pos = nx.spring_layout(G2)  # Define layout for nodes
+nx.draw(G2, pos, with_labels=True, node_color='lightblue', font_weight='bold')  # Draw nodes
+edge_labels = nx.get_edge_attributes(G2, 'weight')
+nx.draw_networkx_edge_labels(G2, pos, edge_labels=edge_labels)  # Draw edge labels
+plt.show()
+
+# Find the shortest path from node 'A' to node 'E' using Dijkstra's Algorithm
+shortest_path = nx.dijkstra_path(G2, 'A', 'E', weight='weight')
+
+print("Shortest path from 'A' to 'E':", shortest_path)  # Output: Shortest path from 'A' to 'E': ['A', 'C', 'D', 'E']
+
+# BFS, breadth-first search using a queue
+
+
+def bfs(graph, start):
+    visited = set()            # Set to keep track of visited nodes
+    queue = deque([start])     # Initialize queue with the starting node
+
+    while queue:               # While the queue is not empty
+        node = queue.popleft() # Dequeue a node from the front of the queue
+        if node not in visited:
+            print(node)        # Process the dequeued node (in this example, print it)
+            visited.add(node)  # Mark the node as visited
+
+            # Enqueue all unvisited adjacent nodes of the dequeued node
+            for neighbor in graph[node]:
+                if neighbor not in visited:
+                    queue.append(neighbor)
+
+# Example graph:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D'],
+    'C': ['A', 'E'],
+    'D': ['B', 'F'],
+    'E': ['C', 'F'],
+    'F': ['D', 'E']
+}
+
+print("BFS traversal starting from node 'A':")
+bfs(graph, 'A')
+
+# Binary search trees for searching and sorting
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, val):
+        if not self.root:
+            self.root = TreeNode(val)
+        else:
+            self._insert_recursive(self.root, val)
+
+    def _insert_recursive(self, node, val):
+        if val < node.val:
+            if node.left is None:
+                node.left = TreeNode(val)
+            else:
+                self._insert_recursive(node.left, val)
+        else:
+            if node.right is None:
+                node.right = TreeNode(val)
+            else:
+                self._insert_recursive(node.right, val)
+
+    def in_order_traversal(self):
+        result = []
+        self._in_order_traversal_recursive(self.root, result)
+        return result
+
+    def _in_order_traversal_recursive(self, node, result):
+        if node:
+            self._in_order_traversal_recursive(node.left, result)
+            result.append(node.val)
+            self._in_order_traversal_recursive(node.right, result)
+            
+    def search(self, val):
+        return self._search_recursive(self.root, val)
+
+    def _search_recursive(self, node, val):
+        if node is None:
+            return False
+        elif node.val == val:
+            return True
+        elif val < node.val:
+            return self._search_recursive(node.left, val)
+        else:
+            return self._search_recursive(node.right, val)
+
+
+
+
+# Example usage:
+bst = BinarySearchTree()
+numbers = [5, 3, 8, 1, 7, 10, 6]
+
+# Insert elements into the binary search tree
+for num in numbers:
+    bst.insert(num)
+
+# Search for specific elements
+print("Is 7 present in the tree?", bst.search(7))  # Output: Is 7 present in the tree? True
+print("Is 4 present in the tree?", bst.search(4))  # Output: Is 4 present in the tree? False
+
+
+# Example usage:
+bst1 = BinarySearchTree()
+numbers = [5, 3, 8, 1, 7, 10, 6, 3, 33]
+
+# Insert elements into the binary search tree
+for num in numbers:
+    bst1.insert(num)
+
+# Perform in-order traversal to retrieve sorted elements
+sorted_numbers = bst1.in_order_traversal()
+print("Sorted numbers:", sorted_numbers)
+
+
+
+
+# Create a heap
+# Or rather manipulate a list as a priority queue
+# Example list
+my_list = [3, 1, 4, 1, 5, 9, 2, 6]
+
+# Convert the list into a heap with heapify method
+heapq.heapify(my_list)
+
+print("Heapified list:", my_list)  # Output: Heapified list: [1, 1, 2, 6, 5, 9, 4, 3]
+
+# Push an element onto the heap
+heapq.heappush(my_list, 7)
+
+print("After pushing 7:", my_list)  # Output: After pushing 7: [1, 1, 2, 6, 5, 9, 4, 3, 7]
+
+# Pop the smallest element from the heap
+smallest = heapq.heappop(my_list)
+
+print("Smallest element:", smallest)  # Output: Smallest element: 1
+print("After popping smallest:", my_list)  # Output: After popping smallest: [1, 3, 2, 6, 5, 9, 4, 7]
