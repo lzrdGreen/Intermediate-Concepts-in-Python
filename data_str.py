@@ -1,4 +1,4 @@
-from collections import deque, Counter, OrderedDict
+from collections import deque, Counter, OrderedDict, namedtuple
 import heapq
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -110,6 +110,44 @@ my_ordered_dict['c'] = -99
 print(my_ordered_dict) # Output: OrderedDict([('a', 1), ('b', 2), ('x', 25), ('c', -99)])
 
 
+# Define a named tuple 'Point' with fields 'x' and 'y'
+Point = namedtuple('Point', ['x', 'y'])
+
+# Create a Point object
+p = Point(1, 2)
+
+# Access fields by name
+print(p.x)  # Output: 1
+print(p.y)  # Output: 2
+
+# Example of using sets
+my_set = set()  # Create an empty set
+my_set.add(1)   # Add elements to the set
+my_set.add(2)
+my_set.add(3)
+my_set.add(1)   # Adding duplicate element has no effect
+print("Set:", my_set)  # Output: Set: {1, 2, 3}
+
+# Example of set operations
+other_set = {2, 3, 4}
+union_set = my_set.union(other_set)
+intersection_set = my_set.intersection(other_set)
+difference_set = my_set.difference(other_set)
+print("Union:", union_set)            # Output: Union: {1, 2, 3, 4}
+print("Intersection:", intersection_set)  # Output: Intersection: {2, 3}
+print("Difference:", difference_set)  # Output: Difference: {1}
+
+# Example of using frozensets
+my_frozenset = frozenset({1, 2, 3})  # Create a frozenset
+print("Frozenset:", my_frozenset)   # Output: Frozenset: frozenset({1, 2, 3})
+
+# As frozensets are immutable, they can be used as dictionary keys:
+my_dict = {my_frozenset: "value"}
+print("Dictionary:", my_dict)  # Output: Dictionary: {frozenset({1, 2, 3}): 'value'}
+
+# As frozensets are immutable, you can't add new elements
+# Uncomment the following line, it would raise an AttributeError: 'frozenset' object has no attribute 'add'
+# my_frozenset.add(12)
 
 # Let's draw a very simple graph, a triangle with nodes 1,2,and 3
 # Create an empty graph

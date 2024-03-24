@@ -23,9 +23,9 @@ It's useful to know that lambda functions can help with writing a simple code fo
 You may find this link useful: ["How to Use Python Lambda Functions"](https://realpython.com/python-lambda/)
 
 ### Data structures from collections, heapq, networkx and beyond
-Python has 4 built-in data structures: lists, tuples, sets and dictionaries. They are all iterables (objects that can be iterated over with the help of a for loop). Another important iterable is an object called strings, they are not considered as data structures but rather a data type (an immutable sequence of characters). Sometimes strings along with float, integer and boolean variables are called primitive data structures.
+Python has several built-in data structures, the most important include: lists, tuples, sets and dictionaries. They are all iterables (objects that can be iterated over with the help of a for loop). Another important iterable is an object called strings, they are not usually considered as data structures but rather a data type (an immutable sequence of characters). Sometimes strings along with float, integer and boolean variables are called primitive data structures.
 
-These four data structures are so important and widely used that they are built in the language itself and optimised. They come with their own methods. Still you may need more advanced data structures (to store and organise your data) - some of them can be imported from existing libraries, others are user-defined. The choice of data structure depends on the requirements of your problem: which operations needs to be the most efficient - searching? sorting? insertion/ deletion? Understanding the strengths and weaknesses of the data structure you use is crucial.
+These four data structures are so important and widely used that they are built in the language itself and optimised. (I often see some people claiming that Python has 4 built-in data structures which is definitely not true - see below examples of frozenset, another built-in data structure. It makes sense to read read the official Python documentation regarding [Built-in Types](https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset)). They come with their own methods. Still you may need more advanced data structures (to store and organise your data) - some of them can be imported from existing libraries, others are user-defined. The choice of data structure depends on the requirements of your problem: which operations needs to be the most efficient - searching? sorting? insertion/ deletion? Understanding the strengths and weaknesses of the data structure you use is crucial.
 
 **Queues:** first-in-first-out (FIFO) data structures useful in modelling waiting lines (=queues) and breadth-first search.
 
@@ -35,21 +35,25 @@ These four data structures are so important and widely used that they are built 
 
 **Trees:** hierarchical data structures with parent-child relationships, often used for efficient searching and sorting. In graph theory a tree is an undirected graph in which any two nodes are connected by exactly one edge, and there are no cycles. In computer science a tree is also a graph (a directed acyclic graph - DAG) which has a root (a node without any parent), nodes (with a parent and children) and leaves (nodes without children). It looks like a flipped over tree. Binary trees are extremely often used.
 
-There is a number of list-like data structure: arrays, numpy arrays, linked lists, circular linked lists, namedtuples - to name a few.
+There is a number of list-like data structure: stacks/ queues, arrays, numpy arrays, linked lists, circular linked lists - to name a few.
+
+The natural extension for tuples are namedtuples.
 
 There are various dictionary-like structures: hash tables (in fact, a dictionary in Python is a kind of hash table under the hood), OrderedDict, etc
 
 Some other data structures: heaps, priority queues, tries (= prefix trees), various probabilistic data structures (Bloom filters, Bayesian networks, Markov random fields). I am not going to discuss probabilistic data structures here as they are quite advanced.
 
-All examples of implementation of data structures using libraries/ modules are presented in data_str.py.
+All examples of implementation of data structures are presented in data_str.py.
 
-If I couldn't find a suitable library to create a data structure discussed above, they are delayed until the next section about Python classes.
-
-In data_str.py I use deque objects (from the collections module) to implement both **stacks** and **queues** with most important methods for them: push and pop new elements, view the element to be popped next without removing it (peek), print out the stack/ queue, find out its length.
+I use deque objects (from the collections module) to implement both **stacks** and **queues** with most important methods for them: push and pop new elements, view the element to be popped next without removing it (peek), print out the stack/ queue, find out its length.
 
 By the way, another useful object in the library collections is **Counter**. It is not a data structure, of course , but I included an example of how to use Counter anyway.
 
-In Python dictionaries are unordered collections of key-value pairs. You may need a dictionary-like structure which remembers the order in which its elements were added: **OrderedDict**, a dictionary subclass from the collections. It maintains the order of insertion, unlike regular/ built-in dictionaries which may reorder the elements for efficiency.
+In Python dictionaries are unordered collections of key-value pairs. Keys are immutable (can't be changed, either add or delete) but the values are easy to assign a new value. You may need a dictionary-like structure which remembers the order in which its elements were added: **OrderedDict**, a dictionary subclass from the collections. It maintains the order of insertion, unlike regular/ built-in dictionaries which may reorder the elements for efficiency.
+
+Named tuples are also included in the collections module. The idea is to make the data easy to recognise - I use a named tuple for a point in 2 dimensions.
+
+Another example of using hash tables (for efficiency, of course) in disguise: sets in Python are implemented using hash tables under the hood. Hash tables are a common data structure for implementing sets because they provide efficient average-case time complexity for common set operations such as membership testing, insertion, and deletion.Sets are typically used for storing mutable collections of unique elements. They are useful for tasks like removing duplicates from a list, performing set operations like union, intersection, difference, and symmetric difference, and testing membership of elements. Frozensets: Frozensets are useful when you need an immutable collection of unique elements, such as when you want to use a set-like object as a key in a dictionary or as an element in another set. Frozensets are also hash tables under the hood, utilizing a similar mechanism for efficient storage and retrieval of elements. However, because frozensets are immutable, they do not need to support operations that modify their contents like sets do.  
 
 Now you need to install these modules:matplotlib, networkx.I recommend using: conda install networkx matplotlib (if you installed your Python using Miniconda or Anaconda).
 
@@ -59,7 +63,7 @@ Next I show how to use a queue, the data sructure we discussed at the beginning,
 
 Next, let's talk about trees. The simplest tree is a binary tree, a tree data structure in which each node has no more than two children: 2, 1, and for a leaf 0. An important kind is a binary search tree (BST) - "with the key of each internal node being greater than all the keys in the respective node's left subtree and less than the ones in its right subtree"...shamelessly borrowed from Wikipedia article on [BST](https://en.wikipedia.org/wiki/Binary_search_tree). As a result, on average, the time complexity of search, insert, delete operations is O(log(n)) but in the worst case their time complexity is O(n). Although you can use specialised modules for graphs but for simple operations like sorting or searching it seems to be an overkill. By the way, you may need even more specialised BST structures like [red-black trees](https://en.wikipedia.org/wiki/Red–black_tree) or [AVL trees](https://en.wikipedia.org/wiki/AVL_tree).
 
-Next, let's talk about [heaps](https://en.wikipedia.org/wiki/Heap_(data_structure)). They are helpful if you need to find and remove an element with the lowest/ largest score again and again while new elements are added to the data structure. In Python, min-heap is a kind of implemented in its standard library heapq which allow users to manipulate lists as priority queues or heaps. If you need a max-heap, just multiply all elements by -1. If all this about heaps is not very clear yet, just look in the code, it's really simple. What you need to remember that time complexity of popping the smallest element is constant, O(1), while insertion of a new element (with heappush method) is O(log(n)) time complexity. 
+Next, let's talk about [heaps](https://en.wikipedia.org/wiki/Heap_(data_structure)). They are helpful if you need to find and remove an element with the lowest/ largest score again and again while new elements are added to the data structure. In Python, min-heap is a kind of implemented in its standard library heapq which allow users to manipulate lists as priority queues or heaps. If you need a max-heap, just multiply all elements by -1. If all this about heaps is not very clear yet, just look in the code, it's really simple. What you need to remember is that time complexity of popping the smallest element is constant, O(1), while insertion of a new element (with heappush method) has O(log(n)) time complexity. For queues and stacks the time complexity of push and pop operations is O(1), while search is O(n).
 
 
 
