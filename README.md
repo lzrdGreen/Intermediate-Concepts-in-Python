@@ -65,6 +65,48 @@ Next, let's talk about trees. The simplest tree is a binary tree, a tree data st
 
 Next, let's talk about [heaps](https://en.wikipedia.org/wiki/Heap_(data_structure)). They are helpful if you need to find and remove an element with the lowest/ largest score again and again while new elements are added to the data structure. In Python, min-heap is a kind of implemented in its standard library heapq which allow users to manipulate lists as priority queues or heaps. If you need a max-heap, just multiply all elements by -1. If all this about heaps is not very clear yet, just look in the code, it's really simple. What you need to remember is that time complexity of popping the smallest element is constant, O(1), while insertion of a new element (with heappush method) has O(log(n)) time complexity. For queues and stacks the time complexity of push and pop operations is O(1), while search is O(n).
 
+### Object-Oriented Programming (OOP) in Python
+Are you ready to embark on a journey where coding becomes as playful as building with Legos? Picture this: you have a desire to create, to construct not just one, but countless imaginative creations, each with its own unique flair. What if I told you there's a way to do just that in the world of programming? Welcome to the captivating realm of Object-Oriented Programming (OOP) in Python, where concepts like classes and inheritance are not just abstract notions, but the building blocks of limitless digital innovation. Let's dive in and unravel the magic of Python's OOP, where coding becomes akin to crafting your own universe, one class at a time.
 
+**Classes and Objects:**
+Imagine you have a magical Lego instruction booklet that shows you how to build a spaceship. This booklet is like a class in Python. It tells you exactly what pieces you need and how to put them together. Now, when you actually use this booklet to build your spaceship, that's like creating an object. Each object is a unique spaceship that follows the instructions from the class.
 
+**Instances:**
+When you build your spaceship using the instruction booklet, you're making an instance of that spaceship. It's like making a real version of what the instructions show. So, if you want to build ten spaceships, you make ten instances, each following the same instructions but ending up as separate spaceships.
 
+**Methods and Attributes:**
+Now, let's talk about what your spaceship can do and what it's made of. Attributes are like the special features of your spaceship, such as its color, size, and the number of engines it has. Methods, on the other hand, are the cool things your spaceship can do, like flying, making laser sounds, or even transforming into a robot! Just like how your spaceship needs specific Lego pieces to have certain features, attributes are the characteristics your object possesses, while methods are the actions it can perform.
+
+**Basic Inheritance Example:**
+Imagine you've built a marvelous Lego vehicle, a sleek race car with wheels and a steering wheel. Now, your imagination sparks a desire to construct a monstrous truck. But before you start from scratch, think about this: both the race car and the monster truck share common components, like wheels and a steering wheel. Rather than reinventing the wheel (pun intended), you can capitalize on what you've already crafted for the race car and expand upon it to fashion the monster truck.
+
+In Python, this concept aligns with inheritance. Picture the Vehicle class as the parent, serving as the blueprint for all types of vehicles. Within this class lie the fundamental features shared by vehicles, like wheels and steering. Now, envision the race car and the monster truck as child classes derived from the Vehicle class. By inheriting from the Vehicle parent class, both vehicles inherit its basic attributes, such as wheels and steering.
+
+However, inheritance doesn't stop there. With the monster truck class, you have the flexibility to introduce additional attributes and methods specific to this mighty vehicle, such as oversized tires and a thunderous roar. This process allows you to build upon the foundation established by the Vehicle class, enhancing each creation with unique characteristics while minimizing redundancy: with inheritance, you're not starting from square one every time you build something new. Instead, you're building upon the foundation you've already laid, infusing each creation with its own distinctiveness and excitement, much like adding extra features to your Lego masterpieces to make them even cooler and more thrilling!
+
+In essence, inheritance empowers you to extend and customize existing code, much like adding new features to your Lego creations, transforming them into something even more extraordinary.
+(A note of caution: the above part of section on OOP in Python was actually written by ChatGPT 3.5 based on examples I asked to produce Google's Gemini Nano, the simplest, with minor editing A bit too wordy to my taste, but tastes differ...
+
+By the way, Google seems to have silently made a break-through noone noticed: they trained a small LLM, I mean it: SMALL large language model. Their Gemini Nano nicely works on my Pixel 6 off-line! Google claimed that the smallest Gemini Nano has 1.8 billion parameters only - to fit in your device memory. For comparison GPT 3.5 has 175 billion parameters, GPT 4 - nobody knows for sure but Google competitors estimate it as 1 trillion. I am sure Google used neural network distillation for its Gemini Nano training, very likely pruning and quantization. But what else?)
+
+**A simple examplle**
+Now I must write some idiotic Python code with all those car-like classes producing actions like car.signal() method and "make" attribute. Instead, I am going to use class PriorityQueue as a simple example - please see oop_demo.py.
+
+**Class** PriorityQueue: In Python, a class is like a blueprint for creating objects. It defines the properties and behaviors of objects.
+**Object/Instance** pq = PriorityQueue(): An object is a specific instance of a class. It represents a concrete occurrence of the class and has its own unique state and behaviour.
+
+**Attributes:**
+In the PriorityQueue class, _queue and _index are attributes (internal data). _queue is a list that holds items along with their priorities, and _index is used to ensure that items with the same priority are ordered based on their insertion order.
+
+**Methods:**
+__init__: This method is the constructor of the class. It initializes the _queue as an empty list and _index as 0.
+push: This method adds an item to the priority queue along with its priority. It uses the heappush function from the heapq module to maintain the heap invariant.
+pop: This method removes and returns the item with the highest priority from the priority queue. It uses the heappop function from the heapq module to maintain the heap invariant.
+__len__: This method returns the length of the queue.
+Please note: The methods __init__ and __len__ in Python classes are examples of special methods, also known as double underscore methods. These special methods have reserved names that Python recognizes and calls implicitly in specific situations: when you define __init__ and __len__ methods in a class, Python knows how to handle object initialization and length computation automatically, making your code more intuitive and consistent with Python's conventions. Other common examples include: __str__, __getitem__, __setitem__, __iter__, __next__, __eq__ and so on.
+
+We also have one more class in oop_demo.py: TestPriorityQueue.
+**Class Definition:** The TestPriorityQueue class is defined as a subclass of unittest.TestCase. Inheritance is a fundamental concept in OOP, where a class (subclass) can inherit attributes and methods from another class (superclass).
+**Purpose of the Class:** The purpose of the TestPriorityQueue class is to encapsulate test cases that verify the functionality of the PriorityQueue class. This encapsulation aligns with the principle of encapsulation in OOP, where related data and methods are grouped together within a class.
+**Methods:** The class contains test methods such as test_push_pop and test_empty_queue. These methods represent behaviors or actions that validate specific aspects of the PriorityQueue class.
+**Inheritance:** The TestPriorityQueue class inherits from unittest.TestCase, which is a superclass provided by the unittest module in Python. By inheriting from unittest.TestCase, TestPriorityQueue gains access to assertion methods (e.g., assertEqual, assertRaises) and the testing infrastructure provided by the unittest framework. This inheritance relationship highlights the concept of code reuse in OOP, where subclasses can leverage functionalities defined in their superclasses.
