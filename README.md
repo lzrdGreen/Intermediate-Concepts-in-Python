@@ -85,28 +85,38 @@ In Python, this concept aligns with inheritance. Picture the Vehicle class as th
 However, inheritance doesn't stop there. With the monster truck class, you have the flexibility to introduce additional attributes and methods specific to this mighty vehicle, such as oversized tires and a thunderous roar. This process allows you to build upon the foundation established by the Vehicle class, enhancing each creation with unique characteristics while minimizing redundancy: with inheritance, you're not starting from square one every time you build something new. Instead, you're building upon the foundation you've already laid, infusing each creation with its own distinctiveness and excitement, much like adding extra features to your Lego masterpieces to make them even cooler and more thrilling!
 
 In essence, inheritance empowers you to extend and customize existing code, much like adding new features to your Lego creations, transforming them into something even more extraordinary.
-(A note of caution: the above part of section on OOP in Python was actually written by ChatGPT 3.5 based on examples I asked to produce Google's Gemini Nano, the simplest, with minor editing A bit too wordy to my taste, but tastes differ...
+(A note of caution: the above part of section on OOP in Python was actually written by ChatGPT 3.5 based on examples I asked to produce Google's Gemini Nano, the simplest, with minor editing. A bit too wordy to my taste, but tastes differ...
 
-By the way, Google seems to have silently made a break-through noone noticed: they trained a small LLM, I mean it: SMALL large language model. Their Gemini Nano nicely works on my Pixel 6 off-line! Google claimed that the smallest Gemini Nano has 1.8 billion parameters only - to fit in your device memory. For comparison GPT 3.5 has 175 billion parameters, GPT 4 - nobody knows for sure but Google competitors estimate it as 1 trillion. I am sure Google used neural network distillation for its Gemini Nano training, very likely pruning and quantization. But what else?)
+By the way, Google seems to have silently made a break-through nobody noticed: they trained a small LLM, I mean it: SMALL large language model. Their Gemini Nano nicely works on my Pixel 6 off-line! Google claimed that the smallest Gemini Nano has 1.8 billion parameters only - to fit in your device memory. For comparison GPT 3.5 has 175 billion parameters, GPT 4 - nobody knows for sure but Google competitors estimate it as 1 trillion. I am sure Google used neural network distillation for its Gemini Nano training, very likely pruning and quantization. But what else?)
 
-**A simple examplle**
-Now I must write some idiotic Python code with all those car-like classes producing actions like car.signal() method and "make" attribute. Instead, I am going to use class PriorityQueue as a simple example - please see oop_demo.py.
+**A simple example:**
+Now I must write some idiotic Python code with all those car-like classes producing actions like car.signal() method and "make" attribute. Instead, I am going to use class PriorityQueue as a simple example of a data structure (we already used it as a heapified list in data_str.py) - please see oop_demo.py.
 
 **Class** PriorityQueue: In Python, a class is like a blueprint for creating objects. It defines the properties and behaviors of objects.
+
 **Object/Instance** pq = PriorityQueue(): An object is a specific instance of a class. It represents a concrete occurrence of the class and has its own unique state and behaviour.
 
 **Attributes:**
 In the PriorityQueue class, _queue and _index are attributes (internal data). _queue is a list that holds items along with their priorities, and _index is used to ensure that items with the same priority are ordered based on their insertion order.
 
 **Methods:**
-__init__: This method is the constructor of the class. It initializes the _queue as an empty list and _index as 0.
+
+\_\_init__: This method is the constructor of the class. It initializes the _queue as an empty list and _index as 0.
+
 push: This method adds an item to the priority queue along with its priority. It uses the heappush function from the heapq module to maintain the heap invariant.
+
 pop: This method removes and returns the item with the highest priority from the priority queue. It uses the heappop function from the heapq module to maintain the heap invariant.
-__len__: This method returns the length of the queue.
-Please note: The methods __init__ and __len__ in Python classes are examples of special methods, also known as double underscore methods. These special methods have reserved names that Python recognizes and calls implicitly in specific situations: when you define __init__ and __len__ methods in a class, Python knows how to handle object initialization and length computation automatically, making your code more intuitive and consistent with Python's conventions. Other common examples include: __str__, __getitem__, __setitem__, __iter__, __next__, __eq__ and so on.
+
+\_\_len__: This method returns the length of the queue.
+
+Please note: The methods \_\_init__ and \_\_len__ in Python classes are examples of special methods, also known as double underscore methods. These special methods have reserved names that Python recognizes and calls implicitly in specific situations: when you define \_\_init__ and \_\_len__ methods in a class, Python knows how to handle object initialization and length computation automatically, making your code more intuitive and consistent with Python's conventions. Other common examples include: \_\_str__, \_\_getitem__, \_\_setitem__, \_\_iter__, \_\_next__, \_\_eq__ and so on.
 
 We also have one more class in oop_demo.py: TestPriorityQueue.
+
 **Class Definition:** The TestPriorityQueue class is defined as a subclass of unittest.TestCase. Inheritance is a fundamental concept in OOP, where a class (subclass) can inherit attributes and methods from another class (superclass).
+
 **Purpose of the Class:** The purpose of the TestPriorityQueue class is to encapsulate test cases that verify the functionality of the PriorityQueue class. This encapsulation aligns with the principle of encapsulation in OOP, where related data and methods are grouped together within a class.
+
 **Methods:** The class contains test methods such as test_push_pop and test_empty_queue. These methods represent behaviors or actions that validate specific aspects of the PriorityQueue class.
+
 **Inheritance:** The TestPriorityQueue class inherits from unittest.TestCase, which is a superclass provided by the unittest module in Python. By inheriting from unittest.TestCase, TestPriorityQueue gains access to assertion methods (e.g., assertEqual, assertRaises) and the testing infrastructure provided by the unittest framework. This inheritance relationship highlights the concept of code reuse in OOP, where subclasses can leverage functionalities defined in their superclasses.
