@@ -97,7 +97,7 @@ Now I must write some idiotic Python code with all those car-like classes produc
 **Object/Instance** pq = PriorityQueue(): An object is a specific instance of a class. It represents a concrete occurrence of the class and has its own unique state and behaviour.
 
 **Attributes:**
-In the PriorityQueue class, _queue and _index are attributes (internal data). _queue is a list that holds items along with their priorities, and _index is used to ensure that items with the same priority are ordered based on their insertion order.
+In the PriorityQueue class, _queue and _index are attributes (internal data). _queue is a list that holds items along with their priorities, and _index is used to ensure that items with the same priority are ordered based on their insertion order. Probably here I need to talk a bit about the concept of **Encapsulation** which means hiding implementation details of an object from the user, in order to provide a well-defined interface for interacting with the object. In Python, encapsulation can be achieved through the use of private and public variables and methods. Private variables and methods are denoted by prefixing them with two underscores (\_\_), which makes them inaccessible from outside the class. Public variables (and methods) are accessible from outside the class.
 
 **Methods:**
 
@@ -120,3 +120,32 @@ We also have one more class in oop_demo.py: TestPriorityQueue.
 **Methods:** The class contains test methods such as test_push_pop and test_empty_queue. These methods represent behaviors or actions that validate specific aspects of the PriorityQueue class.
 
 **Inheritance:** The TestPriorityQueue class inherits from unittest.TestCase, which is a superclass provided by the unittest module in Python. By inheriting from unittest.TestCase, TestPriorityQueue gains access to assertion methods (e.g., assertEqual, assertRaises) and the testing infrastructure provided by the unittest framework. This inheritance relationship highlights the concept of code reuse in OOP, where subclasses can leverage functionalities defined in their superclasses.
+
+### OOP Programming Paradigm in Python
+First, some definitions with simple illustrations from inheritance_demo.py
+
+In Python, Object-Oriented Programming (OOP) is a programming paradigm that allows you to structure your code by defining objects that contain both data (attributes) and methods (functions). Here are the basic concepts of OOP in Python:
+
+**Abstraction:** 
+Abstraction is the process of hiding the complex implementation details and showing only the necessary features of an object. In Python, you can achieve abstraction through classes and methods. Abstraction is represented through the Collection class, which defines methods like add(), remove(), and display() without specifying their implementations. This allows for hiding the internal details of how these operations are carried out.
+
+**Encapsulation:** 
+Encapsulation refers to the bundling of data and methods that operate on the data into a single unit, i.e., a class. It helps in data hiding, preventing direct access to the internal state of an object from outside the class. In Python, encapsulation is achieved by using access specifiers like public, private, and protected variables and methods. For example, you can use double underscores (__) to make variables or methods private, which can only be accessed within the class. Encapsulation is demonstrated by encapsulating the data (in this case, a list of items) within each child class (e.g., Stack, Queue, etc.) and providing methods to interact with this data.
+
+**Inheritance:** 
+Inheritance is a mechanism in which a new class (subclass/child class) is derived from an existing class (superclass/parent class). The subclass inherits attributes and methods from the superclass, allowing for code reuse and specialization. In Python, you can create a subclass by specifying the superclass in parentheses after the class name. For example,class Queue(Collection) where Collection is the superclass/parent class name. Inheritance is utilized to create subclasses like Stack, Queue, Deque, etc., which inherit common functionality from the Collection superclass. This allows for code reuse and the ability to define specialized behavior in subclasses while retaining the common interface defined in the superclass.
+
+**Polymorphism:**
+Polymorphism allows objects of different classes to be treated as objects of a common superclass. It enables the same method name to be used for different classes, and each class can provide its own implementation. Polymorphism in Python is achieved through method overriding and method overloading. Method overriding occurs when a subclass provides a specific implementation of a method that is already defined in its superclass. Method overloading, on the other hand, involves defining multiple methods with the same name but different parameters. Python does not support method overloading by default. For instance, in inheritance_demo.py the display() method is defined in both parent class, Collection, and in all child classes. So the child classes override it but if, by any chance, you forget to include display() method in any child class, the content would be still printed out by the parent class method. To see how it works just comment the display method in any of the child classes.
+
+**Interfaces:**
+In Python, interfaces are not explicitly defined as in some other languages like Java. Instead, interfaces are implemented implicitly through class inheritance and method overriding. An interface defines a set of methods that a class must implement to be considered as implementing that interface. The Collection class serves as an implicit interface that defines the common methods (add(), remove(), display()) that subclasses must implement. This allows for achieving polymorphism, as objects of different subclasses can be used interchangeably based on their adherence to this interface.
+
+Pay attention to the magic method __len__() defined in the parent class: it is a special method used to return the length of an object. It is called automatically when the built-in len() function is invoked on an object. 
+
+**Multiple Inheritence**
+
+To demonstrate multiple inheritance using the provided example, a new class was created that inherits from both the Stack and Deque classes. This new class  inherit methods from both parent classes, allowing it to exhibit behavior from both. I have no idea where such a beast can be useful but it's a demonstration.
+
+It might be tempting to build a family of Tree classes with multiple inheritence but in practice it doesn't work well.
+
