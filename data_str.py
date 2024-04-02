@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 
 # Deques (double-ended queues) are optimized for fast appends and pops from both ends.
 # They can be used to efficiently implement stacks, queues, etc
+
 # create an instance and print it out
 my_deque = deque([1, 22, -3, 40, 5])
 print(list(my_deque)) # Output: [1, 22, -3, 40, 5]
