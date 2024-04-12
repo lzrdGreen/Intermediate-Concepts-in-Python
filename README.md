@@ -164,10 +164,10 @@ Most popular functions/ methods in re module are: split, compile, match, group, 
 
 First, let's try to search a simple pattern in the text with re.search method. It returns re.Match object, the first match position is provided in span, all the next are ignored (use findall to get a list of all matches). If no match is found re.search returns None.
 
-You can use a dot to represent any character in the pattern. Use square brackets to list allowed characters like r"[aeiou]" is a pattern for vowels. For numerous other simple examples, just follow 
+You can use a dot to represent any character in the pattern. Use square brackets to list allowed characters like r"[aeiou]" is a pattern for vowels. For numerous other simple examples, just follow regex.py.
 
 You may find a lot more in official Python documents. Please also take a look at this [w3school page](https://www.w3schools.com/python/python_regex.asp)
 
-I completed the Regex tutorial with a simple function to test if a variable name is allowed in Pythom. We just scratch the surface. There is a lot more (e.g. how to include special characters like /,\, (,[ etc in the pattern?) to learn by pracitce. If you can't figure out which Regex can be a good pattern for your task, ask a chatbot like ChatGPT, they are very good at this task!
+I completed the Regex tutorial with a simple function to test if a variable name is allowed in Pythom. We just scratch the surface. There is a lot more (e.g. how to include special characters like /,(,[,^,$ etc in the pattern?) to learn by pracitce. If you can't figure out which Regex can be a good pattern for your task, ask a chatbot like ChatGPT, they are very good at this task!
 
 
