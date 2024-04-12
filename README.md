@@ -2,7 +2,7 @@
 ## Intermediate Concepts and Best Practices in Python
 Basic syntax, data types, common in-built data structures (lists, tuples, sets, dictionaries), control flow methods (loops, conditionals, and functions), exception handling, file handling, or importing modules (*.py files) probably don’t need any special demonstration. 
 
-More  advanced concepts like object-oriented programming (including classes, instances and methods, data abstraction, inheritance, encapsulation, polymorphism, etc), lambda functions (especially in list comprehension and for pandas series), generators, regular expressions, maps, collections, decorators will be demonstrated in this repo. It is also important to test software as it is developed. The most basic level is formed by unit tests.
+More  advanced concepts like object-oriented programming (including classes, instances and methods, data abstraction, inheritance, encapsulation, polymorphism, etc), lambda functions (especially in list comprehension and for pandas series), generators, regular expressions, maps, collections will be demonstrated in this repo. It is also important to test software as it is developed. The most basic level of testing is formed by unit tests.
 
 ### Generators
 In Python, a [generator](https://docs.python.org/3/tutorial/classes.html#generators) is a function which returns a generator iterator. It produces a series of values which can be retrieved one at a time with next() function. It's a call-by-need evaluation strategy sometimes called lazy evaluation. It saves memory. Run gen.py to see how it works.
@@ -90,9 +90,10 @@ In Python, this concept aligns with inheritance. Picture the Vehicle class as th
 However, inheritance doesn't stop there. With the monster truck class, you have the flexibility to introduce additional attributes and methods specific to this mighty vehicle, such as oversized tires and a thunderous roar. This process allows you to build upon the foundation established by the Vehicle class, enhancing each creation with unique characteristics while minimizing redundancy: with inheritance, you're not starting from square one every time you build something new. Instead, you're building upon the foundation you've already laid, infusing each creation with its own distinctiveness and excitement, much like adding extra features to your Lego masterpieces to make them even cooler and more thrilling!
 
 In essence, inheritance empowers you to extend and customize existing code, much like adding new features to your Lego creations, transforming them into something even more extraordinary.
+
 (A note of caution: the above part of section on OOP in Python was actually written by ChatGPT 3.5 based on examples I asked to produce Google's Gemini Nano, the simplest, with minor editing. A bit too wordy to my taste, but tastes differ...
 
-By the way, Google seems to have silently made a break-through nobody noticed: they trained a small LLM, I mean it: SMALL large language model. Google claimed that the smallest Gemini Nano has 1.8 billion parameters only. For comparison GPT 3.5 has 175 billion parameters, GPT 4 - nobody knows for sure but Google competitors estimate it as 1 trillion. I am sure Google used neural network distillation for its Gemini Nano training, very likely pruning and quantization. But what else?)
+By the way, Google seems to have silently made a break-through nobody noticed: they trained a small LLM, I mean it: SMALL large language model. Google claimed that the smallest Gemini Nano has 1.8 billion parameters only. For comparison GPT 3.5 has 175 billion parameters, GPT 4 - nobody knows for sure but Google competitors estimate it as 1 trillion. I am sure Google used neural network distillation for its Gemini Nano training - a large model, the teacher, transfers its output, to a small model, student; very likely pruning - cutting off the unused nodes where weights are very close to zero and connecting them links, and quantization - lower bit representation. But what else? - what if they managed to factorise the weight matrices into a composition of matrices with smaller ranks, so called low-rank factorization.)
 
 **A simple example:**
 Now I must write some idiotic Python code with all those car-like classes producing actions like car.signal() method and "make" attribute. Instead - in oop_demo.py - I am going to use class PriorityQueue as a simple example of a data structure (we already used it as a heapified list in data_str.py).
@@ -149,7 +150,24 @@ In Python, interfaces are not explicitly defined as in some other languages like
 Pay attention to the magic method \_\_len__() defined in the parent class: it is a special method used to return the length of an object. It is called automatically when the built-in len() function is invoked on an object. 
 
 **Multiple Inheritence**
-To demonstrate multiple inheritance using the provided example, a new class was created that inherits from both the Stack and Deque classes. This new class  inherit methods from both parent classes, allowing it to exhibit behavior from both. I have no idea where such a beast can be useful but it's a demonstration.
 
+To demonstrate multiple inheritance using the provided example, a new class was created that inherits from both the Stack and Deque classes. This new class  inherit methods from both parent classes, allowing it to exhibit behavior from both. I have no idea where such a beast can be useful but it's a demonstration.
 It might be tempting to build a family of Tree classes with multiple inheritence but in practice it doesn't work well.
+
+### Regular Expressions
+The module re is built in Python (as math, unittest, collections, random, os and some others).
+Regular expressions, or RegEx/ regexp, are search queries of patterns in a text/string. You specify a pattern, the search result which you get are anything that match the pattern. Why is it useful? You can use it to process a text, for instance to replace a word to antother word in a long text, validate if an email looks correctly, or get a sequence of numbers looking like a phone number. (We deal with regular expressions in Python, though you may meet them elsewhere.) These are the first three examples in regex.py - run it!
+
+Right now it may look like nonsense, but we are going to master regex step-by-step.
+
+Most popular functions/ methods in re module are: split, compile, match, group, groups, search, start, end, findall, sub. We'll also give examples of wildcards, repetition qualifiers, escape characters.
+
+First, let's try to search a simple pattern in the text with re.search method. It returns re.Match object, the first match position is provided in span, all the next are ignored (use findall to get a list of all matches). If no match is found re.search returns None.
+
+You can use a dot to represent any character in the pattern. Use square brackets to list allowed characters like r"[aeiou]" is a pattern for vowels. For numerous other simple examples, just follow 
+
+You may find a lot more in official Python documents. Please also take a look at this [w3school page](https://www.w3schools.com/python/python_regex.asp)
+
+I completed the Regex tutorial with a simple function to test if a variable name is allowed in Pythom. We just scratch the surface. There is a lot more (e.g. how to include special characters like /,\, (,[ etc in the pattern?) to learn by pracitce. If you can't figure out which Regex can be a good pattern for your task, ask a chatbot like ChatGPT, they are very good at this task!
+
 
