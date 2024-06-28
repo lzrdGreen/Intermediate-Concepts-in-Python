@@ -114,6 +114,10 @@ class PriorityQueue(Collection):
         
     
 class DoubleEndedQueue(Collection):
+    # actually, you don't need a constructor here, it's just a demo how to use super():
+    def __init__(self):
+        super().__init__()
+        
     def add_front(self, item):
         self._items.insert(0, item)
 

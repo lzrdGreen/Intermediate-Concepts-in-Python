@@ -69,8 +69,16 @@ if __name__ == '__main__':
     pq.push('taskB', 1)
     pq.push('taskC', 2)
     pq.push('taskD', 1)
+    print("Let's look under the hood of the PriorityQueue class:")
+    print(dir(pq))
     
-    print(pq.pop())  # Output: 'taskB'
+    yyString = "abcD"
+    print("Let's look under the hood of a string:")
+    print(dir(yyString))
+    
+    # Here is an exotic way to print pq.pop() which show the meaning of self:
+    print(PriorityQueue.pop(pq))
+    #print(pq.pop())  # Output: 'taskB'
     print(pq.pop())  # Output: 'taskD'
     print(pq.pop())  # Output: 'taskC'
     
